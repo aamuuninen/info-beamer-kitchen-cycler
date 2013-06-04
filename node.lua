@@ -87,7 +87,7 @@ function node.render()
         switcher.draw()
      else
         local child = interrupt_flag
-        print ("Recieved interrupt, binding to child: ".. tostring(child))
+--        print ("Recieved interrupt, binding to child: ".. tostring(child))
 	util.draw_correct(resource.render_child(child), 0, 0, WIDTH, HEIGHT)	    
     end
 end
