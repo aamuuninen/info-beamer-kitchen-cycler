@@ -1,7 +1,5 @@
 gl.setup(1024, 768)
 
-local json = require"json"
-
 util.auto_loader(_G)
 
 -- prevent bugs due to the json files not being written in time
@@ -25,17 +23,24 @@ function round(val, decimal)
 end
 
 
-util.file_watch("current", function(content)
-    local newcurrent = secure_json_decode(content)
-    if newcurrent ~= nil then
-        current = newcurrent
+util.file_watch("temperature", function(content)
+    newtemperature = string.match(content,"[0-9]+\.[0-9]*%s°C")
+    if newtemperature ~= nil then
+        temperature = newtemperature
     end
 end)
 
-util.file_watch("forecast", function(content)
-    local newforecast = secure_json_decode(content)
-    if newforecast ~= nil then
-        forecast = newforecast
+util.file_watch("wind", function(content)
+    newwind = string.match(content,"[0-9]+\.[0-9]*%sm/s")
+    if newwind ~= nil then
+        wind = newwind
+    end
+end)
+
+util.file_watch("rain", function(content)
+    rain = string.match(content,"[0-9]+\.[0-9]*%smm")
+    if newrain ~= nil then
+        rain = newrain
     end
 end)
 
@@ -49,10 +54,11 @@ webfont = resource.load_font("silkscreen.ttf")
 function node.render()
 
     font:write(100, 100, "Wetter", 100, 1,0,0,1)
-    font:write(100,250, "Temperatur: ",50,0,1,0,1) 
+    font:write(100,250, "Temperatur: " .. temperature,50,0,1,0,1) 
+    font:write(100,250, "Windgeschwindigkeit: " .. wind,50,0,1,0,1) 
     font:write(100,350, "Luftfeuchte: %",50,0,1,0,1) 
     font:write(100,450, "Luftdruck: hPa",50,0,1,0,1) 
-    font:write(100,550, "Niederschlag: ",50,0,1,0,1) 
+    font:write(100,550, "Niederschlag: " .. rain,50,0,1,0,1) 
     font:write(100,680, "Wetterdaten via ", 20,0,1,0,1) 
     font:write(100,720, "Aktualisiert um " ,20,0,1,0,1)
 end
