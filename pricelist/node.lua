@@ -19,4 +19,7 @@ function node.render()
 
     font:write(120,  600, "Club Mate", 60, 0,1,0,1)
     font:write(650, 600, "80 cent", 60, 0,1,0,1)
+
+    font:write(120,  800, "Waldhaus 0,33", 60, 0,1,0,1)
+    font:write(650, 800, "75 cent", 60, 0,1,0,1)
 end
