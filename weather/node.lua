@@ -1,9 +1,7 @@
 gl.setup(1024, 768)
 util.auto_loader(_G)
 
-background = resource.load_image("weather_background.jpg")
 font = resource.load_font("font.ttf")
-webfont = resource.load_font("silkscreen.ttf")
 
 temperature = 1
 wind = 1
@@ -78,13 +76,15 @@ util.file_watch("humidity", function(content)
 end)
 
 
-util.file_watch("weather_background.jpg", function(content)
-    background = resource.load_image("weather_background.jpg")
-end)
+--util.file_watch("weather_background.jpg", function(content)
+--    newbackground = resource.load_image("weather_background.jpg")
+--        if newbackground ~= nil then
+--        background = newbackground
+--end)
 
 function node.render()
 
-	background:draw(0,0,WIDTH,HEIGHT)
+	weather_background:draw(0,0,WIDTH,HEIGHT)
 	
     font:write(100, 100, "Wetter", 100, 1,0,0,1)
     font:write(100,250, "Temperatur: " .. temperature,50,0,1,0,1) 
